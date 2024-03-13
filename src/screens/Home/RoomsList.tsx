@@ -31,13 +31,14 @@ export const RoomsList: React.FC<RoomsListProps> = ({}) => {
     }, [])
 
     return (
-        <Surface elevation={2} style={{ flex: 1, width: "100%", borderRadius: 50, padding: 30, alignItems: "center" }}>
-            <Text variant="headlineMedium">salas</Text>
+        <Surface elevation={2} style={{ flex: 1, width: "100%", borderRadius: 50, paddingHorizontal: 30, alignItems: "center", gap: 10 }}>
             <FlatList
                 data={rooms}
-                renderItem={({item}) => <RoomComponent room={item} />}
+                renderItem={({ item }) => <RoomComponent room={item} />}
+                showsVerticalScrollIndicator={false}
                 keyExtractor={(item) => item.id}
-                style={{width: '100%'}}
+                style={{ width: "100%" }}
+                contentContainerStyle={{ gap: 20, paddingVertical: 30 }}
             />
         </Surface>
     )
