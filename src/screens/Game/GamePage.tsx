@@ -4,6 +4,7 @@ import RoomContext from "../../contexts/roomContext"
 import { useIo } from "../../hooks/useIo"
 import { BoardComponent } from "./BoardComponent"
 import { NavigationProp } from "@react-navigation/native"
+import { useSnackbar } from "../../hooks/useSnackbar"
 
 interface GamePageProps {
     navigation: NavigationProp<any, any>
@@ -11,7 +12,9 @@ interface GamePageProps {
 
 export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
     const io = useIo()
+
     const { room, setRoom } = useContext(RoomContext)
+    const snackbar = useSnackbar()
 
     useEffect(() => {
         if (!room) {
@@ -26,6 +29,7 @@ export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
 
         io.on("disconnect", (reason) => {
             setRoom(null)
+            snackbar("conexão perdida")
         })
 
         return () => {
