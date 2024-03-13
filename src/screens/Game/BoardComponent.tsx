@@ -1,8 +1,10 @@
-import React from "react"
-import { View } from "react-native"
+import React, { useCallback, useState } from "react"
+import { PanResponderGestureState, View } from "react-native"
 import { Board } from "../../types/server/class/Board"
 import { Surface } from "react-native-paper"
 import { BoardRowComponent } from "./BoardRowComponent"
+import { POSITION } from "../../types/server/class/chess"
+import { SharedValue } from "react-native-reanimated"
 
 interface BoardComponentProps {
     board: Board
