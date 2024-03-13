@@ -14,6 +14,9 @@ export const BoardSquareComponent: React.FC<BoardSquareComponentProps> = ({ piec
     const panResponder = useRef(
         PanResponder.create({
             onStartShouldSetPanResponder: () => true,
+            onPanResponderStart: () => {
+                console.log("dragging")
+            },
             onPanResponderMove: Animated.event(
                 [
                     null,
@@ -34,10 +37,6 @@ export const BoardSquareComponent: React.FC<BoardSquareComponentProps> = ({ piec
             },
         })
     ).current
-
-    const onPress = () => {
-        console.log(piece)
-    }
 
     return (
         <View style={{ width: size, height: size, borderColor: "black", borderWidth: 1 }}>
