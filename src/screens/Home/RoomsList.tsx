@@ -20,6 +20,7 @@ export const RoomsList: React.FC<RoomsListProps> = ({}) => {
 
     useEffect(() => {
         refreshRooms()
+        const interval = setInterval(() => refreshRooms(), 10 * 1000)
 
         io.on("room:list", (list: Room[]) => {
             // console.log({ list })
@@ -35,6 +36,8 @@ export const RoomsList: React.FC<RoomsListProps> = ({}) => {
         return () => {
             io.off("room:list")
             io.off("room:update")
+
+            clearInterval(interval)
         }
     }, [])
 
