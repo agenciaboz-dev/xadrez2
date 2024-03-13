@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { FlatList, View } from "react-native"
-import { Surface, Text } from "react-native-paper"
+import { Button, Surface, Text } from "react-native-paper"
 import { useIo } from "../../hooks/useIo"
 import { Room } from "../../types/server/class/Room"
 import { RoomComponent } from "./RoomComponent"

@@ -2,11 +2,11 @@ import React from "react"
 import { NavigationContainer } from "@react-navigation/native"
 import { NativeStackNavigationOptions, createNativeStackNavigator } from "@react-navigation/native-stack"
 import { Home } from "./screens/Home"
-import { GamePage } from "./screens/Game"
 import { SettingsPage } from "./screens/Settings"
 import { SettingsProvider } from "./contexts/settingsContext"
 import { Text } from "react-native"
 import constants from "expo-constants"
+import { GamePage } from "./screens/Game/GamePage"
 
 interface RoutesProps {}
 
