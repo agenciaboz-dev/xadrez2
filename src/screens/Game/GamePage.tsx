@@ -1,23 +1,36 @@
 import React, { useContext, useEffect } from "react"
-import { View } from "react-native"
-import { Surface, Text } from "react-native-paper"
+import { Surface } from "react-native-paper"
 import RoomContext from "../../contexts/roomContext"
 import { useIo } from "../../hooks/useIo"
 import { BoardComponent } from "./BoardComponent"
+import { NavigationProp } from "@react-navigation/native"
 
-interface GamePageProps {}
+interface GamePageProps {
+    navigation: NavigationProp<any, any>
+}
 
-export const GamePage: React.FC<GamePageProps> = ({}) => {
+export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
     const io = useIo()
-    const { room } = useContext(RoomContext)
+    const { room, setRoom } = useContext(RoomContext)
+
+    useEffect(() => {
+        if (!room) {
+            navigation.navigate("home")
+        }
+    }, [room])
 
     useEffect(() => {
         if (room) {
             console.log(room)
         }
 
+        io.on("disconnect", (reason) => {
+            setRoom(null)
+        })
+
         return () => {
             io.emit("room:leave")
+            io.off("disconnect")
         }
     }, [])
 
