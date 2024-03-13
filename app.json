@@ -1,0 +1,37 @@
+{
+  "expo": {
+      "name": "xadrez2",
+      "slug": "xadrez2",
+      "owner": "agenciaboz-dev",
+      "version": "1.0.0",
+      "orientation": "portrait",
+      "icon": "./assets/icon.png",
+      "userInterfaceStyle": "auto",
+      "splash": {
+          "image": "./assets/splash.png",
+          "resizeMode": "contain",
+          "backgroundColor": "#ffffff"
+      },
+      "assetBundlePatterns": ["**/*"],
+      "ios": {
+          "supportsTablet": false
+      },
+      "android": {
+          "adaptiveIcon": {
+              "foregroundImage": "./assets/foreground-icon.png",
+              "backgroundImage": "./assets/background-icon.png",
+              "monochromeImage": "./assets/adaptive-icon.png",
+              "backgroundColor": "#ffffff"
+          },
+          "package": "com.agenciabozdev.xadrez2"
+      },
+      "web": {
+          "favicon": "./assets/favicon.png"
+      },
+      "extra": {
+          "eas": {
+              "projectId": "22875742-a038-44a2-9b35-e279396c786f"
+          }
+      }
+  }
+}
