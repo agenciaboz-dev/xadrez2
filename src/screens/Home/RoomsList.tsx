@@ -11,12 +11,20 @@ export const RoomsList: React.FC<RoomsListProps> = ({}) => {
     const io = useIo()
 
     const [rooms, setRooms] = useState<Room[]>([])
+    const [refreshing, setRefreshing] = useState(false)
+
+    const refreshRooms = () => {
+        setRefreshing(true)
+        io.emit("room:list")
+    }
 
     useEffect(() => {
-        io.emit("room:list")
+        refreshRooms()
+
         io.on("room:list", (list: Room[]) => {
             // console.log({ list })
             setRooms(list)
+            setRefreshing(false)
         })
 
         io.on("room:update", (room: Room) => {
@@ -39,6 +47,8 @@ export const RoomsList: React.FC<RoomsListProps> = ({}) => {
                 keyExtractor={(item) => item.id}
                 style={{ width: "100%" }}
                 contentContainerStyle={{ gap: 20, paddingVertical: 30 }}
+                onRefresh={refreshRooms}
+                refreshing={refreshing}
             />
         </Surface>
     )
