@@ -16,6 +16,7 @@ export const BoardSquareComponent: React.FC<BoardSquareComponentProps> = ({ piec
     const even_column = position[1] % 2 === 0
     const white_square = schema.colors.onSurfaceVariant
     const black_square = schema.colors.onPrimary
+    const square_color = even_row ? (even_column ? white_square : black_square) : even_column ? black_square : white_square
 
     const { onSquareDrag } = useContext(RoomContext)
 
@@ -27,10 +28,10 @@ export const BoardSquareComponent: React.FC<BoardSquareComponentProps> = ({ piec
                 height: size,
                 justifyContent: "center",
                 alignItems: "center",
-                backgroundColor: even_row ? (even_column ? white_square : black_square) : even_column ? black_square : white_square,
+                backgroundColor: square_color,
             }}
         >
-            <Text>{piece?.label}</Text>
+            <Text style={{ color: square_color == white_square ? black_square : white_square }}>{piece?.label}</Text>
         </Surface>
     )
 }
