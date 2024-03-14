@@ -1,4 +1,5 @@
-import { COLOR, Chessboard, POSITION } from "../chess";
+import { Chessboard } from "../Board";
+import { COLOR, POSITION } from "../chess";
 export declare class Piece {
     color: COLOR;
     position: POSITION;

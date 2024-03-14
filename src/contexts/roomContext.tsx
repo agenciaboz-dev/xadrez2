@@ -1,9 +1,10 @@
 import { createContext, useCallback, useEffect, useState } from "react"
 import React from "react"
 import { Room } from "../types/server/class/Room"
-import { Chessboard, POSITION } from "../types/server/class/chess"
+import { POSITION } from "../types/server/class/chess"
 import { ChessPiece } from "../types/server/class/ChessPiece"
 import { useIo } from "../hooks/useIo"
+import { Chessboard } from "../types/server/class/Board"
 
 interface RoomContextValue {
     room: Room | null

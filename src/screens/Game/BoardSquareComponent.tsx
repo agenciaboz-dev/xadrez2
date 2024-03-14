@@ -1,10 +1,10 @@
 import React, { useContext, useRef } from "react"
 import { ChessPiece } from "../../types/server/class/ChessPiece"
 import { Surface, Text } from "react-native-paper"
-import { POSITION } from "../../types/server/class/chess"
 import RoomContext from "../../contexts/roomContext"
 import schema from "../../style/colors.json"
 import { Pressable } from "react-native"
+import { POSITION } from "../../types/server/class/chess"
 
 interface BoardSquareComponentProps {
     piece: ChessPiece | null
@@ -36,7 +36,20 @@ export const BoardSquareComponent: React.FC<BoardSquareComponentProps> = ({ piec
                     borderWidth: 2,
                 }}
             >
-                <Text style={{ color: square_color == white_square ? black_square : white_square }}>{piece?.label}</Text>
+                <Surface
+                    elevation={piece ? 2 : 0}
+                    style={{
+                        borderRadius: 100,
+                        width: size * 0.8,
+                        height: size * 0.8,
+                        alignItems: "center",
+                        justifyContent: "center",
+                        backgroundColor: piece?.color == 0 ? "white" : "",
+                        display: !piece ? "none" : "flex",
+                    }}
+                >
+                    <Text style={{ color: piece?.color == 0 ? black_square : white_square }}>{piece?.label}</Text>
+                </Surface>
             </Surface>
         </Pressable>
     )
