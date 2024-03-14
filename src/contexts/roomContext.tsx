@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react"
+import { createContext, useCallback, useEffect, useState } from "react"
 import React from "react"
 import { Room } from "../types/server/class/Room"
 import { POSITION } from "../types/server/class/chess"
@@ -32,21 +32,20 @@ export const RoomProvider: React.FC<RoomProviderProps> = ({ children }) => {
     const [movablePositions, setMovablePositions] = useState<POSITION[]>([])
     const [grid, setGrid] = useState<(ChessPiece | null)[][]>(new Array(8).fill(null).map(() => new Array(8).fill(null)))
 
-    const getPiece = (position: POSITION) => {
-        const grid = room?.game?.board.grid
-        if (grid) {
+    const getPiece = useCallback(
+        (position: POSITION) => {
             const piece = grid[position[0]][position[1]]
             return piece
-        }
-
-        return null
-    }
+        },
+        [grid]
+    )
 
     const onSquarePress = (position: POSITION) => {
         setMovablePositions([])
 
         const piece = getPiece(position)
         if (piece && selectedPiece != piece) {
+            console.log(piece)
             setSelectedPiece(piece)
             io.emit("piece:movements", piece.position)
         } else {
@@ -71,6 +70,7 @@ export const RoomProvider: React.FC<RoomProviderProps> = ({ children }) => {
     useEffect(() => {
         io.on("piece:move", (from: POSITION, to: POSITION) => {
             const piece = grid[from[0]][from[1]]
+            if (piece) piece.position = to
             let new_grid = [...grid]
             new_grid[from[0]][from[1]] = null
             new_grid[to[0]][to[1]] = piece
