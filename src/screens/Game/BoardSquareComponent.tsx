@@ -32,7 +32,7 @@ export const BoardSquareComponent: React.FC<BoardSquareComponentProps> = ({ piec
                     justifyContent: "center",
                     alignItems: "center",
                     backgroundColor: square_color,
-                    borderColor: selectedPiece && selectedPiece == piece ? "red" : is_movable ? "yellow" : "transparent",
+                    borderColor: selectedPiece && selectedPiece == piece ? "blue" : is_movable ? "yellow" : "transparent",
                     borderWidth: 2,
                 }}
             >
