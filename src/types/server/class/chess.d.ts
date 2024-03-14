@@ -1,3 +1,4 @@
+import { ChessPiece } from "./ChessPiece";
 export declare enum COLOR {
     white = 0,
     black = 1
@@ -8,3 +9,4 @@ export declare enum STATUS {
     checkmate = 2
 }
 export type POSITION = [number, number];
+export type Chessboard = (ChessPiece | null)[][];

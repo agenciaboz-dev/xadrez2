@@ -1,9 +1,12 @@
+import { Socket } from "socket.io";
 import { ChessPiece } from "./ChessPiece";
-import { POSITION } from "./chess";
+import { Chessboard, POSITION } from "./chess";
 export declare class Board {
-    grid: (ChessPiece | null)[][];
+    grid: Chessboard;
     constructor();
     addPiece(piece: ChessPiece, position: POSITION): void;
-    movePiece(from: POSITION, to: POSITION): void;
+    movePiece(from: POSITION, to: POSITION): Chessboard;
     print(): void;
+    getPiece(position: POSITION): ChessPiece | null;
+    getPieceMovements(position: POSITION, socket?: Socket): POSITION[];
 }
