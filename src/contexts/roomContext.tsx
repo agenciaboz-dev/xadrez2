@@ -1,7 +1,7 @@
 import { createContext, useCallback, useEffect, useState } from "react"
 import React from "react"
 import { Room } from "../types/server/class/Room"
-import { POSITION } from "../types/server/class/chess"
+import { Chessboard, POSITION } from "../types/server/class/chess"
 import { ChessPiece } from "../types/server/class/ChessPiece"
 import { useIo } from "../hooks/useIo"
 
@@ -68,13 +68,8 @@ export const RoomProvider: React.FC<RoomProviderProps> = ({ children }) => {
     }, [room])
 
     useEffect(() => {
-        io.on("piece:move", (from: POSITION, to: POSITION) => {
-            const piece = grid[from[0]][from[1]]
-            if (piece) piece.position = to
-            let new_grid = [...grid]
-            new_grid[from[0]][from[1]] = null
-            new_grid[to[0]][to[1]] = piece
-            setGrid(new_grid)
+        io.on("piece:move", (grid: Chessboard) => {
+            setGrid(grid)
         })
         return () => {
             io.off("piece:move")
