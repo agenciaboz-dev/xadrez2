@@ -13,7 +13,7 @@ interface GamePageProps {
 export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
     const io = useIo()
 
-    const { room, setRoom } = useContext(RoomContext)
+    const { room, setRoom, grid } = useContext(RoomContext)
     const snackbar = useSnackbar()
 
     useEffect(() => {
@@ -40,7 +40,7 @@ export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
 
     return room?.game ? (
         <Surface style={{ flex: 1, width: "100%", justifyContent: "center", alignItems: "center" }}>
-            <BoardComponent board={room.game?.board} />
+            <BoardComponent grid={grid} />
         </Surface>
     ) : null
 }

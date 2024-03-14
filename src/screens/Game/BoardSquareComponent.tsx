@@ -23,7 +23,7 @@ export const BoardSquareComponent: React.FC<BoardSquareComponentProps> = ({ piec
     const is_movable = !!movablePositions.find((item) => item[0] == position[0] && item[1] == position[1])
 
     return (
-        <Pressable onPress={() => onSquarePress(piece)}>
+        <Pressable onPress={() => onSquarePress(position)}>
             <Surface
                 elevation={3}
                 style={{

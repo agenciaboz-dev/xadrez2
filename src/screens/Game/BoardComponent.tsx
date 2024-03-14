@@ -5,15 +5,16 @@ import { Surface } from "react-native-paper"
 import { BoardRowComponent } from "./BoardRowComponent"
 import { POSITION } from "../../types/server/class/chess"
 import { SharedValue } from "react-native-reanimated"
+import { ChessPiece } from "../../types/server/class/ChessPiece"
 
 interface BoardComponentProps {
-    board: Board
+    grid: (ChessPiece | null)[][]
 }
 
-export const BoardComponent: React.FC<BoardComponentProps> = ({ board }) => {
+export const BoardComponent: React.FC<BoardComponentProps> = ({ grid }) => {
     return (
         <Surface style={{}}>
-            {board.grid.map((row, index) => (
+            {grid.map((row, index) => (
                 <BoardRowComponent key={index} row={row} index={index} />
             ))}
         </Surface>
