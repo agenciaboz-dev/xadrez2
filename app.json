@@ -19,9 +19,9 @@
       },
       "android": {
           "adaptiveIcon": {
-              "foregroundImage": "./assets/icon.webp",
-              "backgroundImage": "./assets/icon.webp",
-              "monochromeImage": "./assets/icon.webp",
+              "foregroundImage": "./assets/icon2.png",
+              "backgroundImage": "./assets/icon2.png",
+              "monochromeImage": "./assets/icon2.png",
               "backgroundColor": "#ffffff"
           },
           "package": "com.agenciabozdev.xadrez2"
