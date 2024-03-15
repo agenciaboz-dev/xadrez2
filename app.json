@@ -5,7 +5,7 @@
       "owner": "agenciaboz-dev",
       "version": "1.0.0",
       "orientation": "portrait",
-      "icon": "./assets/icon.webp",
+      "icon": "./assets/icon2.png",
       "userInterfaceStyle": "auto",
       "backgroundColor": "#1d1b1e",
       "splash": {
