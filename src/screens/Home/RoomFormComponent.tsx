@@ -46,7 +46,7 @@ export const RoomFormComponent: React.FC<RoomFormComponentProps> = ({ visible, c
     return (
         <Portal>
             <Modal visible={visible} onDismiss={close} contentContainerStyle={{ padding: 20 }}>
-                <Surface style={{ padding: 30, borderRadius: 30, gap: 20 }} elevation={5}>
+                <Surface style={{ padding: 30, borderRadius: 30, gap: 20 }} elevation={1}>
                     <Text style={{ alignSelf: "center" }} variant="titleLarge">
                         nova sala
                     </Text>

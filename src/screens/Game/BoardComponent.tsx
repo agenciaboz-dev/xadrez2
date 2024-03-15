@@ -13,7 +13,7 @@ interface BoardComponentProps {
 
 export const BoardComponent: React.FC<BoardComponentProps> = ({ grid }) => {
     return (
-        <Surface style={{}}>
+        <Surface elevation={3} style={{ borderRadius: 15, overflow: "hidden" }}>
             {grid.map((row, index) => (
                 <BoardRowComponent key={index} row={row} index={index} />
             ))}

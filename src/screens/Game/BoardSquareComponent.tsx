@@ -17,8 +17,8 @@ export const BoardSquareComponent: React.FC<BoardSquareComponentProps> = ({ piec
     const size = 40
     const even_row = position[0] % 2 === 0
     const even_column = position[1] % 2 === 0
-    const white_square = schema.colors.onSurfaceVariant
-    const black_square = schema.colors.onPrimary
+    const white_square = schema.colors.secondary
+    const black_square = schema.colors.inversePrimary
     const square_color = even_row ? (even_column ? white_square : black_square) : even_column ? black_square : white_square
     const is_movable = !!movablePositions.find((item) => item[0] == position[0] && item[1] == position[1])
 
