@@ -1,6 +1,7 @@
 import React, { useContext } from "react"
-import { Snackbar as PaperSnackbar } from "react-native-paper"
+import { Snackbar as PaperSnackbar, Portal } from "react-native-paper"
 import SnackbarContext from "../contexts/snackbarContext"
+import schema from "../style/colors.json"
 
 interface snackbarProps {}
 
@@ -8,8 +9,10 @@ export const Snackbar: React.FC<snackbarProps> = ({}) => {
     const snackbar = useContext(SnackbarContext)
 
     return (
-        <PaperSnackbar visible={snackbar.visible} onDismiss={() => snackbar.setVisible(false)}>
-            {snackbar.text}
-        </PaperSnackbar>
+        <Portal>
+            <PaperSnackbar visible={snackbar.visible} onDismiss={() => snackbar.setVisible(false)}>
+                {snackbar.text}
+            </PaperSnackbar>
+        </Portal>
     )
 }

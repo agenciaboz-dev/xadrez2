@@ -6,28 +6,32 @@ import { Room, RoomForm } from "../../types/server/class/Room"
 import { useIo } from "../../hooks/useIo"
 import { NavigationProp } from "@react-navigation/native"
 import RoomContext from "../../contexts/roomContext"
+import { useSnackbar } from "../../hooks/useSnackbar"
 
 interface RoomFormComponentProps {
     visible: boolean
     close: () => void
     navigation: NavigationProp<any, any>
+    joining_room?: Room
 }
 
-export const RoomFormComponent: React.FC<RoomFormComponentProps> = ({ visible, close, navigation }) => {
+export const RoomFormComponent: React.FC<RoomFormComponentProps> = ({ visible, close, navigation, joining_room }) => {
     const password_input_ref = useRef<TextInputNative | null>(null)
     const io = useIo()
 
     const { setRoom } = useContext(RoomContext)
+    const snackbar = useSnackbar()
 
     const [loading, setLoading] = useState(false)
 
     const formik = useFormik<RoomForm>({
-        initialValues: { name: "", password: "" },
+        initialValues: { name: joining_room?.name || "", password: "" },
         onSubmit: (values) => {
             setLoading(true)
             console.log(values)
-            io.emit("room:create", values)
+            joining_room ? io.emit("room:join", joining_room.id, values.password) : io.emit("room:create", values)
         },
+        enableReinitialize: true,
     })
 
     useEffect(() => {
@@ -39,8 +43,16 @@ export const RoomFormComponent: React.FC<RoomFormComponentProps> = ({ visible, c
             formik.resetForm()
         })
 
+        io.on("room:join:error", (error: string) => {
+            snackbar(error)
+            setLoading(false)
+            formik.setFieldValue("password", "")
+            password_input_ref.current?.focus()
+        })
+
         return () => {
             io.off("room:join")
+            io.off("room:join:error")
         }
     })
 
@@ -57,6 +69,7 @@ export const RoomFormComponent: React.FC<RoomFormComponentProps> = ({ visible, c
                         onChangeText={formik.handleChange("name")}
                         returnKeyType="next"
                         onSubmitEditing={() => password_input_ref.current?.focus()}
+                        autoFocus={!joining_room}
                     />
                     <TextInput
                         ref={password_input_ref}
@@ -66,9 +79,10 @@ export const RoomFormComponent: React.FC<RoomFormComponentProps> = ({ visible, c
                         secureTextEntry
                         right={<TextInput.Icon icon="eye" />}
                         onSubmitEditing={() => formik.handleSubmit()}
+                        autoFocus={!!joining_room}
                     />
                     <Button mode="contained-tonal" onPress={() => formik.handleSubmit()} loading={loading}>
-                        criar
+                        {joining_room ? "entrar" : "criar"}
                     </Button>
                 </Surface>
             </Modal>

@@ -4,10 +4,14 @@ import { Button, Surface, Text } from "react-native-paper"
 import { useIo } from "../../hooks/useIo"
 import { Room } from "../../types/server/class/Room"
 import { RoomComponent } from "./RoomComponent"
+import { NavigationProp } from "@react-navigation/native"
 
-interface RoomsListProps {}
+interface RoomsListProps {
+    joinRoomButtom: (value: Room) => void
+    navigation: NavigationProp<any, any>
+}
 
-export const RoomsList: React.FC<RoomsListProps> = ({}) => {
+export const RoomsList: React.FC<RoomsListProps> = ({ joinRoomButtom, navigation }) => {
     const io = useIo()
 
     const [rooms, setRooms] = useState<Room[]>([])
@@ -45,7 +49,7 @@ export const RoomsList: React.FC<RoomsListProps> = ({}) => {
         <Surface elevation={2} style={{ flex: 1, width: "100%", borderRadius: 50, paddingHorizontal: 30, alignItems: "center", gap: 10 }}>
             <FlatList
                 data={rooms}
-                renderItem={({ item }) => <RoomComponent room={item} />}
+                renderItem={({ item }) => <RoomComponent room={item} navigation={navigation} joinRoomButtom={joinRoomButtom} />}
                 showsVerticalScrollIndicator={false}
                 keyExtractor={(item) => item.id}
                 style={{ width: "100%" }}
