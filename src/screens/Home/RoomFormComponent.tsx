@@ -1,6 +1,6 @@
 import { useFormik } from "formik"
-import React, { useContext, useEffect, useState } from "react"
-import { View } from "react-native"
+import React, { useContext, useEffect, useRef, useState } from "react"
+import { TextInput as TextInputNative, View } from "react-native"
 import { Button, Modal, Portal, Surface, Text, TextInput } from "react-native-paper"
 import { Room, RoomForm } from "../../types/server/class/Room"
 import { useIo } from "../../hooks/useIo"
@@ -14,6 +14,7 @@ interface RoomFormComponentProps {
 }
 
 export const RoomFormComponent: React.FC<RoomFormComponentProps> = ({ visible, close, navigation }) => {
+    const password_input_ref = useRef<TextInputNative | null>(null)
     const io = useIo()
 
     const { setRoom } = useContext(RoomContext)
@@ -50,13 +51,21 @@ export const RoomFormComponent: React.FC<RoomFormComponentProps> = ({ visible, c
                     <Text style={{ alignSelf: "center" }} variant="titleLarge">
                         nova sala
                     </Text>
-                    <TextInput label={"nome"} value={formik.values.name} onChangeText={formik.handleChange("name")} />
                     <TextInput
+                        label={"nome"}
+                        value={formik.values.name}
+                        onChangeText={formik.handleChange("name")}
+                        returnKeyType="next"
+                        onSubmitEditing={() => password_input_ref.current?.focus()}
+                    />
+                    <TextInput
+                        ref={password_input_ref}
                         label="senha"
                         value={formik.values.password}
                         onChangeText={formik.handleChange("password")}
                         secureTextEntry
                         right={<TextInput.Icon icon="eye" />}
+                        onSubmitEditing={() => formik.handleSubmit()}
                     />
                     <Button mode="contained-tonal" onPress={() => formik.handleSubmit()} loading={loading}>
                         criar
