@@ -44,7 +44,7 @@ export const BoardSquareComponent: React.FC<BoardSquareComponentProps> = ({ piec
                         height: size * 0.8,
                         alignItems: "center",
                         justifyContent: "center",
-                        backgroundColor: piece?.color == 0 ? "white" : "",
+                        backgroundColor: piece?.color == 0 ? "white" : schema.colors.primaryContainer,
                         display: !piece ? "none" : "flex",
                     }}
                 >
