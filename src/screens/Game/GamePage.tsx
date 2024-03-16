@@ -13,12 +13,13 @@ interface GamePageProps {
 export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
     const io = useIo()
 
-    const { room, setRoom, grid } = useContext(RoomContext)
+    const { room, setRoom, grid, setPlayer } = useContext(RoomContext)
     const snackbar = useSnackbar()
 
     useEffect(() => {
         if (!room) {
             navigation.navigate("home")
+            setPlayer(null)
         }
     }, [room])
 
@@ -29,6 +30,7 @@ export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
 
         io.on("disconnect", (reason) => {
             setRoom(null)
+            setPlayer(null)
             snackbar("conexão perdida")
         })
 

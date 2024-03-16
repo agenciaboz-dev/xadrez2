@@ -12,7 +12,7 @@ interface BoardSquareComponentProps {
 }
 
 export const BoardSquareComponent: React.FC<BoardSquareComponentProps> = ({ piece, position }) => {
-    const { onSquarePress, selectedPiece, movablePositions } = useContext(RoomContext)
+    const { onSquarePress, selectedPiece, movablePositions, player } = useContext(RoomContext)
 
     const size = 40
     const even_row = position[0] % 2 === 0
@@ -23,7 +23,7 @@ export const BoardSquareComponent: React.FC<BoardSquareComponentProps> = ({ piec
     const is_movable = !!movablePositions.find((item) => item[0] == position[0] && item[1] == position[1])
 
     return (
-        <Pressable onPress={() => onSquarePress(position)}>
+        <Pressable onPress={() => onSquarePress(position)} disabled={piece?.color !== player?.color}>
             <Surface
                 elevation={3}
                 style={{

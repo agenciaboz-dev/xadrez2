@@ -7,6 +7,7 @@ import { useIo } from "../../hooks/useIo"
 import { NavigationProp } from "@react-navigation/native"
 import RoomContext from "../../contexts/roomContext"
 import { useSnackbar } from "../../hooks/useSnackbar"
+import { Player } from "../../types/server/class/Player"
 
 interface RoomFormComponentProps {
     visible: boolean
@@ -19,7 +20,7 @@ export const RoomFormComponent: React.FC<RoomFormComponentProps> = ({ visible, c
     const password_input_ref = useRef<TextInputNative | null>(null)
     const io = useIo()
 
-    const { setRoom } = useContext(RoomContext)
+    const { setRoom, setPlayer } = useContext(RoomContext)
     const snackbar = useSnackbar()
 
     const [loading, setLoading] = useState(false)
@@ -40,9 +41,10 @@ export const RoomFormComponent: React.FC<RoomFormComponentProps> = ({ visible, c
     })
 
     useEffect(() => {
-        io.on("room:join", (room: Room) => {
+        io.on("room:join", (room: Room, player: Player) => {
             close()
             setRoom(room)
+            setPlayer(player)
             setLoading(false)
             navigation.navigate("game")
             formik.resetForm()

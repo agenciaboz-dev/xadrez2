@@ -5,10 +5,13 @@ import { POSITION } from "../types/server/class/chess"
 import { ChessPiece } from "../types/server/class/ChessPiece"
 import { useIo } from "../hooks/useIo"
 import { Chessboard } from "../types/server/class/Board"
+import { Player } from "../types/server/class/Player"
 
 interface RoomContextValue {
     room: Room | null
     setRoom: React.Dispatch<React.SetStateAction<Room | null>>
+    player: Player | null
+    setPlayer: React.Dispatch<React.SetStateAction<Player | null>>
 
     onSquarePress: (position: POSITION) => void
     selectedPiece: ChessPiece | null
@@ -29,6 +32,7 @@ export const RoomProvider: React.FC<RoomProviderProps> = ({ children }) => {
     const io = useIo()
 
     const [room, setRoom] = useState<Room | null>(null)
+    const [player, setPlayer] = useState<Player | null>(null)
     const [selectedPiece, setSelectedPiece] = useState<ChessPiece | null>(null)
     const [movablePositions, setMovablePositions] = useState<POSITION[]>([])
     const [grid, setGrid] = useState<(ChessPiece | null)[][]>(new Array(8).fill(null).map(() => new Array(8).fill(null)))
@@ -92,7 +96,7 @@ export const RoomProvider: React.FC<RoomProviderProps> = ({ children }) => {
     }, [])
 
     return (
-        <RoomContext.Provider value={{ room, setRoom, getPiece, onSquarePress, selectedPiece, movablePositions, grid }}>
+        <RoomContext.Provider value={{ room, setRoom, getPiece, onSquarePress, selectedPiece, movablePositions, grid, player, setPlayer }}>
             {children}
         </RoomContext.Provider>
     )
