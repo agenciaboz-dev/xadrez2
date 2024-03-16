@@ -11,7 +11,7 @@
       "splash": {
           "image": "./assets/splash.png",
           "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
+          "backgroundColor": "#00AFEF"
       },
       "assetBundlePatterns": ["**/*"],
       "ios": {
@@ -22,7 +22,7 @@
               "foregroundImage": "./assets/icon2.png",
               "backgroundImage": "./assets/icon2.png",
               "monochromeImage": "./assets/icon2.png",
-              "backgroundColor": "#ffffff"
+              "backgroundColor": "#00AFEF"
           },
           "package": "com.agenciabozdev.xadrez2"
       },
