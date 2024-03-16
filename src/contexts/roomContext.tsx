@@ -58,9 +58,7 @@ export const RoomProvider: React.FC<RoomProviderProps> = ({ children }) => {
         }
     }
 
-    useEffect(() => {
-        console.log({ movablePositions })
-    }, [movablePositions])
+    useEffect(() => {}, [movablePositions])
 
     useEffect(() => {
         if (room?.game?.board) {

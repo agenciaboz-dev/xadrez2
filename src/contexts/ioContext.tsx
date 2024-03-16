@@ -16,6 +16,7 @@ const IoContext = createContext<IoContextValue>({} as IoContextValue)
 export default IoContext
 
 const io = ioSocket(`ws${url}`)
+console.log(`ws${url}`)
 
 export const IoProvider: React.FC<IoProviderProps> = ({ children }) => {
     useEffect(() => {
