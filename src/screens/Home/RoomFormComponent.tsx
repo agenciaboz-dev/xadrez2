@@ -27,6 +27,11 @@ export const RoomFormComponent: React.FC<RoomFormComponentProps> = ({ visible, c
     const formik = useFormik<RoomForm>({
         initialValues: { name: joining_room?.name || "", password: "" },
         onSubmit: (values) => {
+            if (!values.name) {
+                snackbar("cadê o nome")
+                return
+            }
+
             setLoading(true)
             console.log(values)
             joining_room ? io.emit("room:join", joining_room.id, values.password) : io.emit("room:create", values)
