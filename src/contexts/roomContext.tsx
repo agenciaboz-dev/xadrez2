@@ -68,6 +68,7 @@ export const RoomProvider: React.FC<RoomProviderProps> = ({ children }) => {
         if (room?.game?.board) {
             setGrid(room.game.board.grid)
         }
+        setMovablePositions([])
     }, [room])
 
     useEffect(() => {
