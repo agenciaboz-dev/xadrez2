@@ -5,6 +5,7 @@ import { useIo } from "../../hooks/useIo"
 import { BoardComponent } from "./BoardComponent"
 import { NavigationProp } from "@react-navigation/native"
 import { useSnackbar } from "../../hooks/useSnackbar"
+import { GameText } from "./GameText"
 
 interface GamePageProps {
     navigation: NavigationProp<any, any>
@@ -41,7 +42,8 @@ export const GamePage: React.FC<GamePageProps> = ({ navigation }) => {
     }, [])
 
     return room?.game ? (
-        <Surface style={{ flex: 1, width: "100%", justifyContent: "center", alignItems: "center" }}>
+        <Surface style={{ flex: 1, width: "100%", justifyContent: "center", alignItems: "center", gap: 50 }}>
+            <GameText game={room.game} />
             <BoardComponent grid={grid} />
         </Surface>
     ) : null
