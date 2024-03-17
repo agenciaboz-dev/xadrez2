@@ -24,7 +24,8 @@ export const BoardSquareComponent: React.FC<BoardSquareComponentProps> = ({ piec
     const is_movable = movablePositions.find((item) => item[0] == position[0] && item[1] == position[1])
     const is_attackable = !!getPiece(is_movable)
 
-    const can_press = !piece || (room?.game.players.length == 2 && room?.game.current_turn == player?.color && piece.color == player?.color)
+    const can_press =
+        (piece?.color == player?.color || is_attackable || !!is_movable) && room?.game.players.length == 2 && room?.game.current_turn == player?.color
 
 
     return (
