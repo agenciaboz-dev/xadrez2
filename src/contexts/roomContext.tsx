@@ -49,7 +49,7 @@ export const RoomProvider: React.FC<RoomProviderProps> = ({ children }) => {
         setMovablePositions([])
 
         const piece = getPiece(position)
-        if (piece && selectedPiece != piece) {
+        if (piece && piece.color == player?.color && selectedPiece != piece) {
             console.log(piece)
             setSelectedPiece(piece)
             io.emit("piece:movements", piece.position)
