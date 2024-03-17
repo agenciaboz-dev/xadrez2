@@ -6,6 +6,7 @@ export declare class Game {
     players: Player[];
     current_turn: COLOR;
     status: STATUS;
-    constructor(players: Player[]);
+    constructor();
     switchTurn(): void;
+    addPlayer(player: Player): void;
 }
