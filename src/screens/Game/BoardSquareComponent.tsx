@@ -20,9 +20,12 @@ export const BoardSquareComponent: React.FC<BoardSquareComponentProps> = ({ piec
     const white_square = schema.colors.secondary
     const black_square = schema.colors.inversePrimary
     const square_color = even_row ? (even_column ? white_square : black_square) : even_column ? black_square : white_square
-    const is_movable = !!movablePositions.find((item) => item[0] == position[0] && item[1] == position[1])
+    const getPiece = (position?: POSITION) => (position ? room?.game.board.grid[position[0]][position[1]] : null)
+    const is_movable = movablePositions.find((item) => item[0] == position[0] && item[1] == position[1])
+    const is_attackable = !!getPiece(is_movable)
 
     const can_press = !piece || (room?.game.players.length == 2 && room?.game.current_turn == player?.color && piece.color == player?.color)
+
 
     return (
         <Pressable onPress={() => onSquarePress(position)} disabled={!can_press}>
@@ -34,7 +37,7 @@ export const BoardSquareComponent: React.FC<BoardSquareComponentProps> = ({ piec
                     justifyContent: "center",
                     alignItems: "center",
                     backgroundColor: square_color,
-                    borderColor: selectedPiece && selectedPiece == piece ? "blue" : is_movable ? "yellow" : "transparent",
+                    borderColor: selectedPiece && selectedPiece == piece ? "blue" : is_attackable ? "red" : is_movable ? "yellow" : "transparent",
                     borderWidth: 2,
                 }}
             >
