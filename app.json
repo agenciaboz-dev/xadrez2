@@ -6,7 +6,7 @@
       "version": "1.0.0",
       "orientation": "portrait",
       "icon": "./assets/icon2.png",
-      "userInterfaceStyle": "dark",
+      "userInterfaceStyle": "light",
       "backgroundColor": "#1d1b1e",
       "splash": {
           "image": "./assets/splash.png",
@@ -33,6 +33,7 @@
           "eas": {
               "projectId": "1573cd3d-be4a-47c0-b638-9d56959c3766"
           }
-      }
+      },
+      "plugins": [["./plugins/withDisableForcedDarkModeAndroid.js", {}]]
   }
 }
