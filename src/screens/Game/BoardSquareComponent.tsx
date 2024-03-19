@@ -46,15 +46,17 @@ export const BoardSquareComponent: React.FC<BoardSquareComponentProps> = ({ piec
                     elevation={piece ? 2 : 0}
                     style={{
                         borderRadius: 100,
-                        width: size * 0.8,
-                        height: size * 0.8,
+                        width: size * 0.85,
+                        height: size * 0.85,
                         alignItems: "center",
                         justifyContent: "center",
                         backgroundColor: piece?.color == 0 ? "white" : schema.colors.primaryContainer,
                         display: !piece ? "none" : "flex",
                     }}
                 >
-                    <Text style={{ color: piece?.color == 0 ? black_square : white_square }}>{piece?.label}</Text>
+                    <Text style={{ color: piece?.color == 0 ? black_square : white_square }} variant="headlineMedium">
+                        {piece?.label}
+                    </Text>
                 </Surface>
             </Surface>
         </Pressable>
