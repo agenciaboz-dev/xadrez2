@@ -52,6 +52,7 @@ export const BoardSquareComponent: React.FC<BoardSquareComponentProps> = ({ piec
                         justifyContent: "center",
                         backgroundColor: piece?.color == 0 ? "white" : schema.colors.primaryContainer,
                         display: !piece ? "none" : "flex",
+                        transform: [{ rotate: player?.color == 1 ? "180deg" : "0deg" }],
                     }}
                 >
                     <Text style={{ color: piece?.color == 0 ? black_square : white_square }} variant="headlineMedium">
